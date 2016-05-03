@@ -1,0 +1,66 @@
+ARCH          = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+BINARY        = $(addsuffix .elf, ${MODULE})
+OBJECTS       = $(SOURCES:%.cpp=%.o)
+SHAREDLIB     = lib${MODULE}-${VERSION}.so
+CFLAGS       += -I /usr/include/
+CFLAGS       += -I /usr/local/include/
+CFLAGS       += -D__STDC_CONSTANT_MACROS -fPIC -g -ggdb -O3 -Wall -Wextra
+CFLAGS       += -std=c++11
+LDFLAGS      += -L /usr/local/lib/
+SOFLAGS      += -shared -fPIC
+
+__default__: build
+
+all: clean build run
+
+build: ${OBJECTS}
+	@test -d ${OUTDIR} || ((echo -n "Creating directory: ${OUTDIR} ... " && mkdir -p ${OUTDIR} && echo "${OK}") || (echo "${ERROR}"))
+	@echo -n "${COMPILING} ${MODULE} ${VERSION} to ${BINARY} ... "
+	@$(CXX) ${OBJECTS} ${INCLUDE} ${CFLAGS} ${LDFLAGS} -o "${OUTDIR}/${BINARY}" && echo "${OK}" || (echo "${ERROR}"; exit 1;)
+
+clean:
+	@echo -n "${CLEANING} ${MODULE} ... "
+	@rm -f ${OBJECTS} ${OUTDIR}/${BINARY} ${OUTDIR}/${SHAREDLIB} && echo "${OK}" || (echo "${ERROR}"; exit 1;)
+
+env:
+	@echo "\33[33;5m MODULE   \33[0m = ${MODULE}"
+	@echo "\33[33;5m VERSION  \33[0m = ${VERSION}"
+	@echo "\33[33;5m ARCH     \33[0m = ${ARCH}"
+	@echo "\33[33;5m MAIN     \33[0m = ${MAIN}"
+	@echo "\33[33;5m ARGS     \33[0m = ${ARGS}"
+	@echo "\33[33;5m OUTDIR   \33[0m = ${OUTDIR}"
+	@echo "\33[33;5m BINARY   \33[0m = ${BINARY}"
+	@echo "\33[33;5m SHAREDLIB\33[0m = ${SHAREDLIB}"
+	@echo "\33[33;5m INCLUDE  \33[0m = ${INCLUDE}"
+	@echo "\33[33;5m HEADERS  \33[0m = ${HEADERS}"
+	@echo "\33[33;5m SOURCES  \33[0m = ${SOURCES}"
+	@echo "\33[33;5m OBJECTS  \33[0m = ${OBJECTS}"
+	@echo "\33[33;5m CFLAGS   \33[0m = $(CFLAGS)"
+	@echo "\33[33;5m LDFLAGS  \33[0m = ${LDFLAGS}"
+
+run:
+	@echo "${RUNNING} ..."
+	@cd ${OUTDIR} && ./${BINARY} ${ARGS} || (echo "${ERROR}"; exit 1;)
+
+%.o: %.cpp
+	@echo -n "${COMPILING} $(notdir $<) to $(notdir $@) ... "
+	@$(CXX) ${INCLUDE} ${CFLAGS} -c $< -o $@  && ${CHECK}
+
+%.so:
+	@if [ ! -d ${OUTDIR} ]; then mkdir -p ${OUTDIR}; fi
+	@echo -n "${COMPILING} shared library $(notdir $@) ... "
+	@$(CXX) ${INCLUDE} ${SOFLAGS} -o ${OUTDIR}/$@ ${OBJECTS} ${LDFLAGS} && ${CHECK}
+
+%.conf:
+	@echo "# lib ${MODULE} default configuration\n\n${INSTALLDIR}" > ${LDSOCONFDIR}/$@
+
+%.pc:
+	@if [ ! -d ${PKGDIR} ]; then mkdir -p ${PKGDIR}; fi
+	@echo '# Package Information for pkg-config\n\nprefix=/usr/local\n'\
+	'exec_prefix=$${prefix}\nlibdir=$${exec_prefix}/lib\n'\
+	'includedir=$${prefix}/include/compendium/core\n'\
+	'includedir_extra=$${prefix}/include\n\nName: '$@'\n'\
+	'Description: '${DESCRIPTION}'\nVersion: '${VERSION}'\n'\
+	'Libs: -L $${libdir} -l'${MODULE}'\n'\
+	'CFLAGS: -I $${includedir} -I $${includedir_extra}'\
+	> ${PKGDIR}/$@
