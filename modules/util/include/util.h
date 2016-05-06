@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2016 by Carreta Furacao
+ *   Copyright (C) 2016 by Ícaro Magalhães
  *
  *   João Pessoa - PB - Brasil
  *
@@ -14,6 +14,10 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
 
 namespace compendium
 {
@@ -35,6 +39,13 @@ namespace compendium
          * \brief default destructor
          */
 	 	~Util();
+
+        /**
+         * \brief Return manhattan distance between two points in a matrix plane
+         */
+        static int manhattan_distance(std::pair<int, int> p, std::pair<int, int> q);
+
+        static std::vector<int> vector_with_random_ints(int size, int bound);
 
 		/**
          * \brief executes a command and pipes the executes command to the calling program

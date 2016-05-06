@@ -29,7 +29,7 @@
 
 ```sh
     $ cd $COMPENDIUM_PROJECT_PATH
-    $ git clone #TODO
+    $ git clone https://github.com/icaromag/compendium-lib
 ```
 
 ## Installation
