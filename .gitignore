@@ -1,3 +1,22 @@
+# hidden files
+.*
+
+# not ignore gitignore files
+!*.gitignore
+
+# backup files
+*~
+
+# log files
+*.log
+
+# precompiled archives
+*.hpp
+
+# binary files
+*.elf
+*.out
+
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +45,19 @@
 *.exe
 *.out
 *.app
+
+# temporary files
+*.conf
+*.map
+*.pc
+*.swp
+*.txt
+
+# IDE folders
+__history/
+
+# folder of binaries
+bin/
+
+# folder of documentation
+doc/

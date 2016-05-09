@@ -38,7 +38,9 @@ namespace compendium
         /**
          * \brief Create a graph with V vertices
          */
-         Graph(int V) : adj(V), v(V) { }
+        Graph(const int _V) : v(_V), adj(
+            new std::vector< std::vector<int> >(_V)
+        ) { }
 
         /**
          * \brief Default destructor
@@ -58,7 +60,7 @@ namespace compendium
         /**
          * \brief Add an edge v-w
          */
-        void add_edge(int v, int w);
+        void add_edge(const int v, const int w);
 
         /**
          * \brief Return graph string representation
@@ -68,15 +70,19 @@ namespace compendium
         /**
          * /brief Compute the degree of Graph g v's vertex
          */
-        static int degree(Graph &g, int v) { return g.adj[v].size(); }
-        static double average_degree(Graph &g);
-        static int max_degree(Graph &g);
-        static int number_of_self_loops(Graph &g);
+        static int degree(const Graph &_g, const int _v)
+        {
+            return (*(_g.adj))[_v].size();
+        }
+
+        static double average_degree(const Graph &_g);
+        static int max_degree(const Graph &_g);
+        static int number_of_self_loops(Graph &_g);
 
     private:
         int v;
         int e;
-        std::vector< std::vector<int> > adj;
+        std::vector< std::vector<int> > *adj;
 
     };
 
