@@ -5,5 +5,6 @@
 #include <util.h>
 #include <graph.h>
 #include <strings.h>
+#include <opsys.h>
 
 #endif /* COMPENDIUM_H */
