@@ -1,7 +1,7 @@
 #include <graph.h>
 #include <iostream>
 
-using namespace compendium;
+// using namespace compendium;
 
 int main()
 {
