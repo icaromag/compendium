@@ -2,25 +2,17 @@
 #include <iostream>
 
 using namespace compendium;
-using std::cout;
-using std::endl;
+
 int main()
 {
 
-    cout << "Util module test unit is running" << endl;
-    cout << Util::hello() << endl;
+    std::cout << "Util module test unit is running" << std::endl;
+    std::cout << Util::hello() << std::endl;
 
-    cout << "Getting a vector with size 15 and numbers between 0 and 1000" << endl;
+    std::cout << "Getting a vector with size 15 and numbers between 0 and 1000" << std::endl;
     std::vector<int> v = Util::vector_with_random_ints(15, 1000);
 
-    for_each(v.begin(), v.end(),
-        [&](int number)
-        {
-            cout << number << ' ';
-        }
-    );
-
-    cout << endl;
+    Util::print_vector(v, ' ');
 
     return 0;
 

@@ -1,10 +1,8 @@
 #include <util.h>
 
+
 namespace compendium
 {
-
-    Util::Util(){}
-    Util::~Util(){}
 
     int Util::manhattan_distance(std::pair<int, int> p, std::pair<int, int> q)
     {
@@ -25,6 +23,24 @@ namespace compendium
 
         return vec;
 
+    }
+
+    void Util::print_vector(const std::vector<int> &_v, const char _delimit)
+    {
+        for_each(_v.begin(), _v.end(),
+            [&](const int _element)
+            {
+                std::cout << _element << _delimit;
+            }
+        );
+        std::cout << std::endl;
+    }
+
+    bool Util::vector_contains(const std::vector<int> &_v, const int _element)
+    {
+        for(auto it = _v.begin(); it != _v.end(); ++it)
+            if((*it) == _element) return true;
+        return false;
     }
 
     std::string Util::hello()
