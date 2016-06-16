@@ -46,14 +46,30 @@ namespace compendium
          * \param vector with integer elements and a delimiter character
          * \return void
          */
-        static void print_vector(const std::vector<int> &, const char);
+        template <typename T>
+        static void print_vector(const std::vector<T> &_v, const char _delimit)
+        {
+            for_each(_v.begin(), _v.end(),
+                [&](const T _element)
+                {
+                    std::cout << _element << _delimit;
+                }
+            );
+            std::cout << std::endl;
+        }
 
         /**
          * \brief check if integer vector contains element
          * \param vector of ints and a a const int element to look for
          * \return true if contains, false otherwise
          */
-        static bool vector_contains(const std::vector<int> &, const int);
+        template <typename T>
+        static bool vector_contains(const std::vector<T> &_v, const T _element)
+        {
+            for(auto it = _v.begin(); it != _v.end(); ++it)
+                if((*it) == _element) return true;
+            return false;
+        }
 
 		/**
          * \brief executes a command and pipes the executes command to the calling program

@@ -18,6 +18,8 @@ int main()
     _init();
 
     std::cout << Util::hello() << std::endl;
+    std::cout << Sorting::hello() << std::endl;
+
     return 0;
 
 }

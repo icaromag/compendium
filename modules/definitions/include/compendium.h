@@ -6,5 +6,6 @@
 #include <graph.h>
 #include <strings.h>
 #include <opsys.h>
+#include <sorting.h>
 
 #endif /* COMPENDIUM_H */
