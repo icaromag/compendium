@@ -1,6 +1,6 @@
 include ../Makefile.top
 
-MODULE        = graph
+MODULE        = tree
 VERSION       = 1.0.0
 DESCRIPTION   =
 MAIN          = ./cppunit.cpp

@@ -3,6 +3,7 @@
 
 #include <definitions.h>
 #include <util.h>
+#include <tree.h>
 #include <graph.h>
 #include <strings.h>
 #include <opsys.h>

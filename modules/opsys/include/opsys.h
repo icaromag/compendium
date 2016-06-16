@@ -64,9 +64,6 @@ namespace compendium
          */
         static int LRUAlgorithm(const std::vector<int> &, const uint);
 
-        // static void sort_pcb(std::vector<OpSys::process> &_pcb);
-
-
         /**
          * \brief Time slices are assigned to each process in equal portions
          *        and in circular order, handling all processes without priority

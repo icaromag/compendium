@@ -34,7 +34,7 @@ namespace compendium
 
         /**
          * \brief aux function that exchage two values based on position
-         * \params a vector and two positions from elements that needs
+         * \param a vector and two positions from elements that needs
          *      to be exchanged
          */
         template <typename T>
@@ -48,7 +48,7 @@ namespace compendium
         /**
          * \brief Insertion Sort, you should know when is a good
          *      choice use it
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
@@ -62,7 +62,7 @@ namespace compendium
         /**
          * \brief Selection Sort, you should know when is a good
          *      choice use it
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
@@ -86,7 +86,7 @@ namespace compendium
          * \brief Shell Sort, you should know when is a good
          *      choice use it. This method uses the sequence
          *      h = 3*h + 1. You should know what it means.
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
@@ -115,7 +115,7 @@ namespace compendium
         /**
          * \brief Heap Sort using the std functions from the
          *      algorithm header
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
@@ -127,7 +127,7 @@ namespace compendium
 
         /**
          * \brief Merge Sort, NLogN divide and conquer
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
@@ -185,7 +185,7 @@ namespace compendium
         /**
          * \brief Quick Sort, NLogN. Random shuffled vectors
          *      take advantage of this implementation.
-         * \params vector<T> with elements to be sorted
+         * \param vector<T> with elements to be sorted
          * \return void
          */
         template <typename T>
