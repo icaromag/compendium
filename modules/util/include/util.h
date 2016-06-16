@@ -71,6 +71,19 @@ namespace compendium
             return false;
         }
 
+        /**
+         * \brief aux function that exchage two values based on position
+         * \params a vector and two positions from elements that needs
+         *      to be exchanged
+         */
+        template <typename T>
+        static void exchange(std::vector<T> &v, const uint i, const uint j)
+        {
+            T aux = v[i];
+            v[i] = v[j];
+            v[j] = aux;
+        }
+
 		/**
          * \brief executes a command and pipes the executes command to the calling program
          */

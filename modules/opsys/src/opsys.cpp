@@ -48,7 +48,7 @@ namespace compendium
     }
 
     int OpSys::FIFOAlgorithm(const std::vector<int> &_memory_ref_sequence,
-        const unsigned int _qt_memory_pages)
+        const uint _qt_memory_pages)
     {
         std::vector< std::pair<int, int> > _memory_pages;
         int result = 0;
@@ -97,10 +97,10 @@ namespace compendium
         const std::vector<int> &__memory_ref_sequence, const int _curr_index)
     {
 
-        for(unsigned int i = 0; i < __memory_pages.size(); ++i)
+        for(uint i = 0; i < __memory_pages.size(); ++i)
         {
 
-            for(unsigned int j = _curr_index; j < __memory_ref_sequence.size(); ++j)
+            for(uint j = _curr_index; j < __memory_ref_sequence.size(); ++j)
             {
                 if(__memory_pages[i].first == __memory_ref_sequence[j])
                 {
@@ -116,7 +116,7 @@ namespace compendium
 
         int maximum_index(INT_MIN);
         int maximum_value(INT_MIN);
-        for(unsigned int i = 0; i < __memory_pages.size(); ++i)
+        for(uint i = 0; i < __memory_pages.size(); ++i)
         {
             if(__memory_pages[i].second > maximum_value)
             {
@@ -131,7 +131,7 @@ namespace compendium
     }
 
     int OpSys::OptimumAlgorithm(const std::vector<int> &_memory_ref_sequence,
-        const unsigned int _qt_memory_pages)
+        const uint _qt_memory_pages)
     {
 
         std::vector< std::pair<int, int> > _memory_pages;
@@ -180,7 +180,7 @@ namespace compendium
 
         int maximum_index(INT_MIN);
         int maximum_value(INT_MIN);
-        for(unsigned int i = 0; i < __memory_pages.size(); ++i)
+        for(uint i = 0; i < __memory_pages.size(); ++i)
         {
             if(__memory_pages[i].second > maximum_value)
             {
@@ -195,7 +195,7 @@ namespace compendium
     }
 
     int OpSys::LRUAlgorithm(const std::vector<int> &_memory_ref_sequence,
-        const unsigned int _qt_memory_pages)
+        const uint _qt_memory_pages)
     {
 
         std::vector< std::pair<int, int> > _memory_pages;
@@ -207,7 +207,7 @@ namespace compendium
 
             int curr_element = *it;
 
-            for(unsigned int i = 0; i < _memory_pages.size(); ++i)
+            for(uint i = 0; i < _memory_pages.size(); ++i)
             {
                 _memory_pages[i].second++;
             }
@@ -240,7 +240,7 @@ namespace compendium
                 else
                 {
 
-                    for(unsigned int i = 0; i < _memory_pages.size(); i++)
+                    for(uint i = 0; i < _memory_pages.size(); i++)
                     {
                         if(_memory_pages[i].first == curr_element)
                         {
@@ -297,7 +297,7 @@ namespace compendium
 
             case FCFS:
                 alg = "FCFS";
-                for(unsigned int i = 0; i < _processes.size(); i++)
+                for(uint i = 0; i < _processes.size(); i++)
                 {
                     return_time += _processes[i].return_time - _processes[i].arrival_time;
                     response_time += _processes[i].response_time;
@@ -342,12 +342,12 @@ namespace compendium
         double wait_time(0);
         double turnaround_time(0);
         int remaining_processes(_procs.size());
-        unsigned int i(0);
+        uint i(0);
 
         //The vector received as argument should not be modified.
         std::vector<process> processes;
 
-        for(unsigned int i = 0; i < _procs.size(); i++)
+        for(uint i = 0; i < _procs.size(); i++)
         {
             processes.push_back(
                 process(
@@ -412,7 +412,7 @@ namespace compendium
         //  the vector received as argument should not be modified.
         std::vector<process> processes;
 
-        for(unsigned int i = 0; i < _procs.size(); i++)
+        for(uint i = 0; i < _procs.size(); i++)
         {
             processes.push_back(
                 process(
@@ -427,7 +427,7 @@ namespace compendium
         processes[0].response_time = processes[0].arrival_time;
         processes[0].wait_time = processes[0].arrival_time;
 
-        for(unsigned int i = 1; i < processes.size(); i++)
+        for(uint i = 1; i < processes.size(); i++)
         {
             processes[i].return_time =
                 processes[i-1].return_time + processes[i].burst_time;
@@ -451,7 +451,7 @@ namespace compendium
         //  the vector received as argument should not be modified.
         std::vector<process> processes;
 
-        for(unsigned int i = 0; i < _procs.size(); i++)
+        for(uint i = 0; i < _procs.size(); i++)
         {
             processes.push_back(
                 process(
@@ -470,10 +470,10 @@ namespace compendium
 
         processes[0].wait_time = 0.0;
 
-        for(unsigned int i = 1; i < processes.size(); i++)
+        for(uint i = 1; i < processes.size(); i++)
         {
             processes[i].wait_time = 0;
-            for(unsigned int j = 0; j < i; j++)
+            for(uint j = 0; j < i; j++)
                 processes[i].wait_time += processes[j].burst_time;
 
             total_time += processes[i].wait_time;
@@ -483,7 +483,7 @@ namespace compendium
 
         total_time = 0;
 
-        for(unsigned int i = 0; i < processes.size(); i++)
+        for(uint i = 0; i < processes.size(); i++)
         {
             total_time += processes[i].burst_time + processes[i].wait_time;
         }

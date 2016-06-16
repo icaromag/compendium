@@ -10,6 +10,7 @@
 
 #include <compendium.h>
 #include <iostream>
+#include <vector>
 
 /* optional namespace */
 // using namespace compendium;
@@ -17,7 +18,8 @@
 int main()
 {
 
-    std::cout << compendium::Util::hello() << std::endl;
+    std::vector<int> v = Util::vector_with_random_ints(10,100);
+    Sorting::insertion(v);
 
     return 0;
 

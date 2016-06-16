@@ -46,7 +46,7 @@ namespace compendium
          * \params vector of integers and unsigned int size for a chunk of memory
          * \return number of times that occours memory substitutions
          */
-        static int FIFOAlgorithm(const std::vector<int> &, const unsigned int);
+        static int FIFOAlgorithm(const std::vector<int> &, const uint);
 
         /**
          * \brief Memory Paging Algorithm that receives a vector of integers and a size
@@ -54,7 +54,7 @@ namespace compendium
          * \params vector of integers and unsigned int size for a chunk of memory
          * \return number of times that occours memory substitutions
          */
-        static int OptimumAlgorithm(const std::vector<int> &, const unsigned int);
+        static int OptimumAlgorithm(const std::vector<int> &, const uint);
 
         /**
          * \brief Memory Paging Algorithm that receives a vector of integers and a size
@@ -62,7 +62,7 @@ namespace compendium
          * \params vector of integers and unsigned int size for a chunk of memory
          * \return number of times that occours memory substitutions
          */
-        static int LRUAlgorithm(const std::vector<int> &, const unsigned int);
+        static int LRUAlgorithm(const std::vector<int> &, const uint);
 
         // static void sort_pcb(std::vector<OpSys::process> &_pcb);
 
