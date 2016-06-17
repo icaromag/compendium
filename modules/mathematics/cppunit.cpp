@@ -22,6 +22,15 @@ int main()
 
     COUT(Mathematics::convert_num_to_base(100, 2));
 
+    long *pows = Mathematics::dynamic_power(2, 10);
+    std::vector<long> vpows(pows, pows+10);
+    Util::print_vector(vpows, ' ');
+
+
+    unsigned long long *facts = Mathematics::dynamic_factorial(10);
+    std::vector<long> vfacts(facts, facts+10);
+    Util::print_vector(vfacts, ' ');
+
     return 0;
 
 }
