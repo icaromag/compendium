@@ -28,6 +28,8 @@
 namespace compendium
 {
 
+    typedef std::pair<int, int> IntPair;
+
     /**
      * \brief The class represents an undirected graph of vertices.
      */
@@ -68,7 +70,7 @@ namespace compendium
         std::string to_string();
 
         /**
-         * /brief Compute the degree of Graph g v's vertex
+         * \brief Compute the degree of Graph g v's vertex
          */
         static int degree(const Graph &_g, const int _v)
         {
@@ -85,6 +87,69 @@ namespace compendium
         std::vector< std::vector<int> > *adj;
 
     };
+
+    namespace mst {
+
+        /**
+         * \brief Data structure that keeps track of a set of elements partitioned into a number of disjoint (nonoverlapping) subsets
+         */
+        class DisjointSets {
+
+        public:
+
+            /**
+             * \brief Creates a struct for n elements
+             * \param n - number of elements
+             */
+            DisjointSets(int n);
+
+            ~DisjointSets();
+
+            /**
+             * \brief Finds the representant element of the set that contains i
+             * \param i - id of the element
+             * \return id of the representant element
+             */
+            int findSet(int i);
+
+            /**
+             * \brief Checks if two elements are from the same set
+             * \param i - id of the first  element
+             * \param i - id of the second element
+             * \return true if they are, or false otherwise
+             */
+            bool isSameSet(int i, int j);
+
+            /**
+             * \brief Joins two subsets
+             * \param i - id of one element of the first subset
+             * \param i - id of one element of the second subset
+             */
+            void unionSet(int i, int j);
+
+        private:
+            std::vector<int> p;
+            std::vector<int> rank;
+
+        };
+
+        /**
+         * \brief Returns the cost of the minimum spanning tree and represents it in a disjoint sets structure
+         * \param ds - disjoint sets structure to populate
+         * \param edgeList - sorted edge list, the first element is the weith, the second is a pair of vertex
+         * \return the cost
+         */
+        static int kruskal(DisjointSets& ds, const std::vector<std::pair<int, IntPair>>& edgeList);
+
+        /**
+         * \brief Returns the cost of the minimum spanning tree
+         * \param size - number of vertex
+         * \param adjList - list of adjacencies
+         * \return the cost
+         */
+        static int prim(std::size_t size, std::vector<std::vector<IntPair>> adjList);
+
+    }
 
 }
 
