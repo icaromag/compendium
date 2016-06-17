@@ -10,11 +10,6 @@
 
 namespace compendium {
 
-	std::string Strings::hello_strings()
-	{
-		return "module strings test";
-	}
-
 	int* Strings::generatePreffixLengths(const std::string& text)
 	{
 		int* occurr = new int[text.length() + 1];

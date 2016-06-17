@@ -71,113 +71,104 @@ namespace compendium {
 
     }
 
+    DisjointSets::DisjointSets(int n)
+    {
+        p.assign(n, 0);
+        rank.assign(n, 0);
 
-    namespace mst {
+        for (int i = 0; i < n; i++)
+            p[i] = i;
+    }
 
-        DisjointSets::DisjointSets(int n)
+    DisjointSets::~DisjointSets() { }
+
+    int DisjointSets::findSet(int i) {
+        return p[i] == i ? i : (p[i] = findSet(p[i]));
+    }
+
+    bool DisjointSets::isSameSet(int i, int j) {
+        return findSet(i) == findSet(j);
+    }
+
+    void DisjointSets::unionSet(int i, int j)
+    {
+        int is = findSet(i);
+        int js = findSet(j);
+
+        if (is != js)
         {
-            p.assign(n, 0);
-            rank.assign(n, 0);
-            cost = 0;
+            if (rank[is] > rank[js])
+                p[js] = is;
+            else {
+                p[is] = js;
 
-            for (int i = 0; i < n; i++)
-                p[i] = i;
+                if (rank[is] == rank[js])
+                    rank[js]++;
+            }
         }
+    }
 
-        DisjointSets::~DisjointSets() {
-            delete p;
-            delete rank;
-        }
+    int kruskal(DisjointSets& ds, const std::vector<std::pair<int, IntPair>>& edgeList)
+    {
+        int cost = 0;
 
-        int DisjointSets::findSet(int i) {
-            return p[i] == i ? i : (p[i] = findSet(p[i]));
-        }
-
-        bool DisjointSets::isSameSet(int i, int j) {
-            return findSet(i) == findSet(j);
-        }
-
-        void DisjointSets::unionSet(int i, int j)
+        for (uint i = 0; i < edgeList.size(); i++)
         {
-            int is = findSet(i);
-            int js = findSet(j);
+            std::pair<int, IntPair> front = edgeList[i];
 
-            if (is != js)
+            if ( ! ds.isSameSet(front.second.first, front.second.second))
             {
-                if (rank[is] > rank[js])
-                    p[js] = is;
-                else {
-                    p[is] = js;
-                    
-                    if (rank[is] == rank[js])
-                        rank[js]++;
-                }
+                cost += front.first;
+                ds.unionSet(front.second.first, front.second.second);
             }
         }
 
-        int kruskal(DisjointSets& ds, const std::vector<std::pair<int, IntPair>>& edgeList)
+        return cost;
+    }
+
+    void prim_process(int vertex, std::vector<bool>& marked, std::priority_queue<IntPair> edges, std::vector<std::vector<IntPair>> adjList)
+    {
+        marked[vertex] = true;
+
+        for (std::size_t i = 0; i < adjList[vertex].size(); i++)
         {
-            int cost = 0;
+            IntPair u = adjList[vertex][i];
 
-            for (int i = 0; i < edgeList.size(); i++)
+            if ( ! marked[u.first])
+                // Adds negative value for weight to get smallers first
+                edges.push(std::make_pair(-u.second, u.first));
+        }
+    }
+
+    int prim(std::size_t size, std::vector<std::vector<IntPair>> adjList)
+    {
+        // global boolean flag to avoid cycle
+        std::vector<bool> marked;
+        marked.assign(size, false);
+
+        // priority queue to help choose shorter edges
+        std::priority_queue<IntPair> edges;
+
+        // take vertex 0 and process all edges incident to vertex 0
+        prim_process(0, marked, edges, adjList);
+        int cost = 0;
+
+        while ( ! edges.empty())
+        {
+            IntPair front = edges.top(); edges.pop();
+
+            // The weight was inserted as negative value
+            int weight = -front.first;
+            int vertex = front.second;
+
+            if ( ! marked[vertex])
             {
-                std::pair<int, IntPair> front = edgeList[i];
-
-                if ( ! ds.isSameSet(front.second.first, front.second.second))
-                {
-                    cost += front.first;
-                    ds.unionSet(front.second.first, front.second.second);
-                }
+                cost += weight;
+                prim_process(vertex, marked, edges, adjList);
             }
-
-            return cost;
         }
 
-        void prim_process(int vertex, std::vector<int>& marked, std::priority_queue<IntPair> edges, std::vector<std::vector<IntPair>> adjList)
-        {
-            marked[vertex] = true;
-
-            for (std::size_t i = 0; i < adjList[vertex].size(); i++)
-            {
-                IntPair u = adjList[vertex][i];
-
-                if ( ! marked[u.first])
-                    // Adds negative value for weight to get smallers first
-                    edges.push(std::make_pair(-u.second, u.first));
-            }
-        }
-
-        int prim(std::size_t size, std::vector<std::vector<IntPair>> adjList)
-        {
-            // global boolean flag to avoid cycle
-            std::vector<bool> marked;
-            marked.assign(size, false);
-
-            // priority queue to help choose shorter edges
-            std::priority_queue<IntPair> edges;
-            
-            // take vertex 0 and process all edges incident to vertex 0
-            prim_process(0, marked, edges);
-            int cost = 0;
-
-            while ( ! edges.empty())
-            {
-                IntPair front = edges.top(); edges.pop();
-
-                // The weight was inserted as negative value
-                int weight = -front.first;
-                int vertex = front.second;
-
-                if ( ! marked[vertex])
-                {
-                    cost += weight;
-                    prim_process(vertex);
-                }
-            }
-
-            return cost;
-        }
-
+        return cost;
     }
 
 } // end of namespace
