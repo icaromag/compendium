@@ -142,18 +142,18 @@ namespace compendium {
 				else if (j == 0)
 					dp[i][j] = std::make_pair(i, -1);
 
-				else if (from[i - 1] == to[j - 1]) // match
-					dp[i][j] = std::make_pair(dp[i - 1][j - 1].first, 1);
+				else if (from[i - 1] == to[j - 1])
+					dp[i][j] = std::make_pair(dp[i - 1][j - 1].first, 1); // match
 
 				else {
-					if (dp[i][j - 1] < dp[i - 1][j]) // insertion
-						dp[i][j] = std::make_pair(dp[i][j - 1].first + 1, 2);
+					if (dp[i][j - 1] < dp[i - 1][j])
+						dp[i][j] = std::make_pair(dp[i][j - 1].first + 1, 2); // insertion
 
-					else if (dp[i - 1][j] < dp[i - 1][j - 1]) // remove
-						dp[i][j] = std::make_pair(dp[i - 1][j].first + 1, 3);
+					else if (dp[i - 1][j] < dp[i - 1][j - 1])
+						dp[i][j] = std::make_pair(dp[i - 1][j].first + 1, 3); // remove
 
-					else // replace
-						dp[i][j] = std::make_pair(dp[i - 1][j - 1].first + 1, 4);
+					else
+						dp[i][j] = std::make_pair(dp[i - 1][j - 1].first + 1, 4); // replace
 				}
 			}
 		}
