@@ -22,16 +22,9 @@ namespace compendium
 	/**
 	 * \brief Class string test
 	 */
-	class Strings
-	{
+	class Strings {
 
 	public:
-
-		/**
-		 * \brief Return hello strings
-		 * \return string with hello
-		 */
-		static std::string hello_strings();
 
 		/**
 		 * \brief Returns the list of preffix lengths in each position
@@ -77,6 +70,18 @@ namespace compendium
 		 * \return substring length
 		 */
 		static std::size_t countPeriodicSubstring(const std::string& text);
+
+		/**
+		 * \brief Returns the edition distance
+		 * \return number os editions
+		 */
+		static int editDistance(const std::string& from, const std::string& to);
+
+		/**
+		 * \brief Returns the edition distance and operation matrix
+		 * \return matrix of edition distance and operation (0: match, 1: insertion, 2: remove, 3: replace)
+		 */
+		static std::pair<int, int>** editDistancePath(const std::string& from, const std::string& to);
 
 	};
 
