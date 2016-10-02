@@ -15,6 +15,7 @@
 #
 #   For further information contact:
 #   icaro.lmag@gmail.com
+#   mateusplpl@gmail.com
 # *******************************************************************************
 
 PROJECTNAME = compendium-lib

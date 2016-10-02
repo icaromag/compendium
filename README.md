@@ -3,7 +3,7 @@
 ## Requirements
 
 - Recommended OS: [Linux Ubuntu 14.04.4 LTS 64-bit](http://releases.ubuntu.com/14.04/)
-- You need install some packages: `g++`, `git`, `doxygen`, `make`
+- You need some packages installed: `g++`, `git`, `doxygen`, `make`
 - To generate documentation: `doxygen`, `texlive`, `abntex`, `texlive-latex-extra`, `texlive-lang-portuguese`, `texlive-math-extra`
 
 ```sh
