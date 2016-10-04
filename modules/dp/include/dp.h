@@ -32,14 +32,20 @@ namespace compendium
 
     public:
 
+        // TODO docs
         static int binary_knapsack(int W, std::vector< std::pair<int, int> > &sack, int n);
 
+        // TODO docs
         static int coin_change(int cents, int* coins, int s);
 
+        // TODO docs
         static bool word_break(std::string str, const std::vector<std::string> dictionary);
 
+        // TODO docs
         static int binomial_coefficient(const int n, const int k);
 
+        // TODO docs
+        static int longest_common_subsequence(const std::string &str1, const std::string &str2);
 
     };
 

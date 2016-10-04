@@ -107,13 +107,32 @@ bool binomial_coefficient_UnitTest()
 
 }
 
+bool longest_common_subsequence_UnitTest()
+{
+
+    std::string str1 = "AGGTAB";
+    std::string str2 = "GXTXAYB";
+
+    // test case based on GeeksForGeeks webpage
+    std::cout << "Length of LCS is " <<
+        DP::longest_common_subsequence(str1, str2) << std::endl;
+
+    return true;
+
+}
+
+
 int main( /* int argc, char const *argv[] */ ) // temp wunused input parsing vars
 {
 
-    assert(binary_knapsack_UnitTest());
-    assert(coin_change_UnitTest());
-    assert(word_break_UnitTest());
-    assert(binomial_coefficient_UnitTest());
+    assert(longest_common_subsequence_UnitTest());
+    std::cout << "lcs test passed" << std::endl;
+
+    // TODO provide test input files
+    // assert(binary_knapsack_UnitTest());
+    // assert(coin_change_UnitTest());
+    // assert(word_break_UnitTest());
+    // assert(binomial_coefficient_UnitTest());
 
     std::clog << "all tests passed" << std::endl;
 
