@@ -2,7 +2,9 @@
 
 namespace compendium
 {
-    // Emty in case of generic programming
+
+    // Check dp.h that contains doc and header refs
+    // Check cpp unit that contains unit tests
     int DP::binary_knapsack(int W, std::vector< std::pair<int, int> > &sack, int n)
     {
 
@@ -30,4 +32,31 @@ namespace compendium
         return K[n][W];
 
     }
+
+    // Just the implementation
+    // Check dp.h that contains doc and header refs
+    // Check cpp unit that contains unit tests
+    int DP::binomial_coefficient(const int n, const int k)
+    {
+        int dp[n+1][k+1];
+
+        for (int i = 0; i <= n; i++)
+        {
+            for (int j = 0; j <= std::min(k, n); j++) //k > n doesn't make sense
+            {
+                if (i == 0 || j == 0 || j == i) //C(i, 0) = C(i, i) = 1 : base case
+                {
+                    dp[i][j] = 1;
+                }
+                else
+                {
+                    dp[i][j] = dp[i-1][j-1] + dp[i-1][j]; //recursion on table
+                }
+            }
+        }
+
+        return dp[n][k];
+    }
+
+
 }

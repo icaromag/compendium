@@ -120,31 +120,7 @@ namespace compendium
         }
         */
 
-
-        // BINCOEF
-        static int binomialCoefficient(int n, int k)
-        {
-            int dp[n+1][k+1];
-
-            for (int i = 0; i <= n; i++)
-            {
-                for (int j = 0; j <= std::min(k, n); j++) //k > n doesn't make sense
-                {
-                    if (i == 0 || j == 0 || j == i) //C(i, 0) = C(i, i) = 1 : base case
-                    {
-                        dp[i][j] = 1;
-                    }
-                    else
-                    {
-                        dp[i][j] = dp[i-1][j-1] + dp[i-1][j]; //recursion on table
-                    }
-                }
-            }
-
-            return dp[n][k];
-        }
-
-
+        static int binomial_coefficient(const int n, const int k);
 
     };
 
