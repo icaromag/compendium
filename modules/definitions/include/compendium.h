@@ -9,5 +9,7 @@
 #include <opsys.h>
 #include <mathematics.h>
 #include <sorting.h>
+#include <dp.h>
+#include <greedy.h>
 
 #endif /* COMPENDIUM_H */
