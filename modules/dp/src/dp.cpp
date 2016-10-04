@@ -33,7 +33,7 @@ namespace compendium
 
     }
 
-    static int coin_change(int cents, int* coins, int s)
+    int DP::coin_change(int cents, int* coins, int s)
     {
         if(cents <= 0) return 0;
 
@@ -90,7 +90,7 @@ namespace compendium
     }
 
 
-    static bool word_break(std::string str, const std::vector<std::string> dictionary)
+    bool DP::word_break(std::string str, const std::vector<std::string> dictionary)
     {
         int size = str.size();
         if (size == 0) return true;

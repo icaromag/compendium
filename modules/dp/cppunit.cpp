@@ -40,7 +40,9 @@ bool coin_change_UnitTest()
     {
         int *coins = new int[q];
         for (int i = 0; i < q; i++)
-            cin >> coins[i];
+        {
+            std::cin >> coins[i];
+        }
 
         std::cout << "Cents: " << cents << std::endl << "Coins: ";
 
@@ -65,6 +67,7 @@ bool word_break_UnitTest()
     std::string curr_word;
     std::string input;
     int tries;
+    int qt_words;
 
     std::cin >> qt_words;
 
@@ -72,7 +75,7 @@ bool word_break_UnitTest()
     {
         std::cin >> curr_word;
         // adding word to dictionary
-        dictionary.push_back(word);
+        dictionary.push_back(curr_word);
     }
 
 
@@ -80,9 +83,9 @@ bool word_break_UnitTest()
 
     while (tries--)
     {
-        std::cin >> in;
-        std::cout << in << " ";
-        std::cout << (DP::word_break(in) ? "In": "Out") << std::endl;
+        std::cin >> input;
+        std::cout << input << " ";
+        std::cout << (DP::word_break(input, dictionary) ? "In": "Out") << std::endl;
     }
 
     return true;
