@@ -70,16 +70,10 @@ namespace compendium
 
 
         // TODO fix word break
-        /*
-        static bool dict_contains(std::string word, const std::string *&dictionary, const int dict_size) const
-        {
-            for (int i = 0; i < dict_size; i++)
-                if (dictionary[i] == word)
-                   return true;
-            return false;
-        }
 
-        static bool wordBreak(std::string str, const std::string *&dictionary, const int dict_size)
+
+
+        static bool word_break(std::string str, const std::vector<std::string> dictionary)
         {
             int size = str.size();
             if (size == 0) return true;
@@ -89,7 +83,7 @@ namespace compendium
 
             for (int i = 1; i <= size; i++)
             {
-                if (piece[i] == false && dict_contains(str.substr(0, i)), dictionary, dict_size)
+                if (piece[i] == false && dict_contains(str.substr(0, i), dictionary))
                 {
                     piece[i] = true; //if piece[i] == true we dont need check
                 }
@@ -103,14 +97,14 @@ namespace compendium
 
                     for (int j = i+1; j <= size; j++)
                     {
-                        if (piece[j] == false && dict_contains(str.substr(i, j-i)), dictionary, dict_size)
+                        if (piece[j] == false && dict_contains(str.substr(i, j-i), dictionary))
                         {
-                            piece[j] = true; //same check, but now in the remains
+                            piece[j] = true; //same check, but now in the remainders
                         }
 
                         if (j == size && piece[j] == true)
                         {
-                            return true; //last character
+                            return true; //last char
                         }
                     }
                 }
@@ -118,9 +112,27 @@ namespace compendium
 
             return false;
         }
-        */
+
 
         static int binomial_coefficient(const int n, const int k);
+
+    private:
+
+        // word break aux function
+        static bool dict_contains(std::string word, const std::vector<std::string> dictionary)
+        {
+
+            for (unsigned int i = 0; i < dictionary.size(); i++)
+            {
+                if (dictionary[i] == word)
+                {
+                   return true;
+                }
+            }
+
+            return false;
+
+        }
 
     };
 

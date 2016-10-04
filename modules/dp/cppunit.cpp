@@ -83,12 +83,27 @@ bool word_break_UnitTest()
     return true;
 
 }
-int main()
+
+bool binomial_coefficient_UnitTest()
+{
+    // TODO refactor inputs
+    // int n, k;
+
+    // while (cin >> n >> k)
+    //     cout << "C(" << n << ", " << k << "): " << DP::binomial_coefficient(n, k) << endl;
+
+    // TODO remove hardcoded return val
+    return true;
+
+}
+
+int main( /* int argc, char const *argv[] */ ) // temp wunused input parsing vars
 {
 
     assert(binary_knapsack_UnitTest());
     assert(coin_change_UnitTest());
     assert(word_break_UnitTest());
+    assert(binomial_coefficient_UnitTest());
 
     std::clog << "all tests passed" << std::endl;
 
