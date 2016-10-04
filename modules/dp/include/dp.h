@@ -28,6 +28,8 @@ namespace compendium
     class DP
     {
 
+    public:
+        static int knapSack(int W, std::vector< std::pair<int, int> > &sack, int n);
     };
 
 }
