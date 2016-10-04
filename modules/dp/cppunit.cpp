@@ -33,66 +33,73 @@ bool binary_knapsack_UnitTest()
 
 bool coin_change_UnitTest()
 {
-    /* TODO refactor this unit test
 
     int cents, q;
 
-    while (cin >> cents >> q)
+    while (std::cin >> cents >> q)
     {
         int *coins = new int[q];
-        for (int i = 0; i < q; i++) cin >> coins[i];
+        for (int i = 0; i < q; i++)
+            cin >> coins[i];
 
-        cout << "Cents: "<< cents << endl << "Coins: ";
-        for (int i = 0; i < q; i++) cout << coins[i] << " ";
-        cout << endl << DP::coin_change(cents, coins, q) << endl;
+        std::cout << "Cents: " << cents << std::endl << "Coins: ";
+
+        for (int i = 0; i < q; i++)
+        {
+            std::cout << coins[i] << " ";
+        }
+
+        std::cout << std::endl << DP::coin_change(cents, coins, q) << std::endl;
 
         delete coins;
     }
 
-    */
-
-    // TODO remove hardcoded return val
     return true;
+
 }
 
 bool word_break_UnitTest()
 {
 
-    // TODO add namespaces and refactor input parsing
-/*
-    cin >> dictionary_size;
-
-    // TODO refactor input parsing
-    dictionary = new string[dictionary_size];
-    for (int i = 0; i < dictionary_size; i++)
-        cin >> dictionary[i];
-
+    std::vector<std::string> dictionary;
+    std::string curr_word;
+    std::string input;
     int tries;
-    string in;
 
-    cin >> tries;
+    std::cin >> qt_words;
+
+    while(qt_words--)
+    {
+        std::cin >> curr_word;
+        // adding word to dictionary
+        dictionary.push_back(word);
+    }
+
+
+    std::cin >> tries;
+
     while (tries--)
     {
-        cin >> in;
-        cout << in << " ";
-        word_break(in) ? cout << "In\n": cout << "Out\n";
+        std::cin >> in;
+        std::cout << in << " ";
+        std::cout << (DP::word_break(in) ? "In": "Out") << std::endl;
     }
-*/
 
-    // TODO remove hardcoded return val
     return true;
 
 }
 
 bool binomial_coefficient_UnitTest()
 {
-    // TODO refactor inputs
-    // int n, k;
 
-    // while (cin >> n >> k)
-    //     cout << "C(" << n << ", " << k << "): " << DP::binomial_coefficient(n, k) << endl;
+    int n, k;
 
-    // TODO remove hardcoded return val
+    while (std::cin >> n >> k)
+    {
+        std::cout << "C(" << n << ", " << k << "): "
+            << DP::binomial_coefficient(n, k) << std::endl;
+    }
+
     return true;
 
 }
