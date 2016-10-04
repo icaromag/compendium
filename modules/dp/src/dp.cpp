@@ -3,7 +3,7 @@
 namespace compendium
 {
     // Emty in case of generic programming
-    int DP::knapSack(int W, std::vector< std::pair<int, int> > &sack, int n)
+    int DP::binary_knapsack(int W, std::vector< std::pair<int, int> > &sack, int n)
     {
 
         int K[n+1][W+1];
