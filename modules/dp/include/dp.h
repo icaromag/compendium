@@ -37,6 +37,7 @@ namespace compendium
 
         // TODO docs
         static int coin_change(int cents, int* coins, int s);
+        static int coin_change(const std::vector<int> &coins, const int N);
 
         // TODO docs
         static bool word_break(std::string str, const std::vector<std::string> dictionary);
@@ -46,9 +47,6 @@ namespace compendium
 
         // TODO docs
         static int longest_common_subsequence(const std::string &str1, const std::string &str2);
-
-        // TODO docs
-        static int coin_change(const std::vector<int> &coins, const int N);
 
     };
 

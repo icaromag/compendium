@@ -33,6 +33,7 @@ namespace compendium
 
     }
 
+    // TODO refactor to parse array and use vector the version
     int DP::coin_change(int cents, int* coins, int s)
     {
         if(cents <= 0) return 0;
