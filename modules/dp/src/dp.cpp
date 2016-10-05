@@ -64,8 +64,30 @@ namespace compendium
 
     }
 
-    // Just the implementation
-    // Check dp.h that contains doc and header refs
+    // vector version
+    int DP::coin_change(const std::vector<int> &coins, const int N)
+    {
+        int M = coins.size();
+        int dp[N+1][M];
+        int x, y;
+
+        for (int i = 0; i < M; i++)
+        {
+            dp[0][i] = 1;
+        }
+
+        for (int i = 1; i < N+1; i++)
+        {
+            for (int j = 0; j < M; j++)
+            {
+                x = (i-coins[j] >= 0)? dp[i - coins[j]][j]: 0;
+                y = (j >= 1)? dp[i][j-1]: 0;
+                dp[i][j] = x + y;
+            }
+        }
+        return dp[N][M - 1];
+    }
+
     // Check cpp unit that contains unit tests
     int DP::binomial_coefficient(const int n, const int k)
     {
@@ -161,7 +183,6 @@ namespace compendium
         return dp[M][N];
 
     }
-
 
 
 }
