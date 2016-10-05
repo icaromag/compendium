@@ -48,6 +48,13 @@ namespace compendium
         // TODO docs
         static int longest_common_subsequence(const std::string &str1, const std::string &str2);
 
+        // TODO static _ pascal_triangle( );
+        // TODO static _ box_stacking( )
+        // TODO static _ shortest_path( );
+        // TODO static _ subset_sum( );
+        // TODO static _ matrix_mul( );
+        // TODO static _ edit_distance( );
+
     };
 
 }
