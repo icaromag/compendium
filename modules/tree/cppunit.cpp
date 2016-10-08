@@ -1,5 +1,5 @@
-#include <tree.h>
 #include <iostream>
+#include <tree.h> // or just module <binary-tree.h>
 
 using namespace compendium;
 
@@ -19,6 +19,7 @@ int main()
     // char_btree->btree_transversal(BTreeTransversal::PREFIX, true);
     // char_btree->btree_transversal(BTreeTransversal::INFIX, true);
     // char_btree->btree_transversal(BTreeTransversal::POSTFIX, true);
+
 
     return 0;
 
