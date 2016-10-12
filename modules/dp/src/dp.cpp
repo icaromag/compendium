@@ -185,5 +185,31 @@ namespace compendium
 
     }
 
+    int DP::edit_distance(const std::string &u, const std::string &v)
+    {
+        int dp[u.size()+1][v.size()+1];
+
+        for(unsigned int i = 0; i <= u.size(); i++)
+        {
+            dp[i][0] = i;
+        }
+
+        for(unsigned int j = 0; j <= v.size(); j++)
+        {
+            dp[0][j] = j;
+        }
+
+        for(unsigned int i = 1; i <= u.size(); i++)
+        {
+            for(unsigned int j = 1; j <= v.size(); j++)
+            {
+                if(u[i-1] == v[j-1]) dp[i][j] = dp[i-1][j-1];
+                else dp[i][j] = 1 + std::min(std::min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]);
+            }
+        }
+
+        return dp[u.size()][v.size()];
+    }
+
 
 }
