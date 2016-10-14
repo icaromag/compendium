@@ -86,9 +86,81 @@ public:
         }
     }
 
+    int V() const { return V_; }
+
 // private:
     int V_;
     std::deque<Edge*> *adj_;
+
+};
+
+class UnionFind
+{
+public:
+
+    UnionFind(int N)
+    {
+        parent_ = new int[N];
+        rank_ = new short[N];
+
+        for (int i = 0; i < N; ++i)
+        {
+            parent_[i] = i;
+            rank_[i] = 0;
+        }
+    }
+
+    int find(int p)
+    {
+        while (p != parent_[p])
+        {
+            // path compression by halving
+            // read Robert Sedgewick's book, noob
+            parent_[p] = parent_[parent_[p]];
+            p = parent_[p];
+        }
+        return p;
+    }
+
+    bool connected(int p, int q)
+    {
+        return find(p) == find(q);
+    }
+
+    void unite(int p, int q)
+    {
+        int root_p = find(p);
+        int root_q = find(q);
+
+        if (root_p == root_q)
+        {
+            return;
+        }
+
+        // make root of smaller rank point to root of larger rank
+        if (rank_[root_p] < rank_[root_q])
+        {
+            parent_[root_p] = root_q;
+        }
+        else if (rank_[root_p] > rank_[root_q])
+        {
+            parent_[root_q] = root_p;
+        }
+        else
+        {
+            parent_[root_q] = root_p;
+            rank_[root_p]++;
+        }
+
+        count_--;
+    }
+
+    int count() const { return count_; }
+
+private:
+    int *parent_;
+    short *rank_;
+    int count_;
 
 };
 
@@ -97,9 +169,12 @@ class KruskalMST
 
 public:
 
-    template<typename T> void print_queue(T& q) {
-        while(!q.empty()) {
-            std::cout << q.top() << '\n';
+    // Add to util class
+    template<typename T> void printer(T q) {
+        while(!q.empty())
+        {
+            std::cout << q.front() << '\n';
+            // std::cout << q.top() << '\n';
             q.pop();
         }
         std::cout << '\n';
@@ -108,19 +183,40 @@ public:
     KruskalMST(const EdgeWeightedGraph graph)
     {
         for (int i = 0; i < graph.V_; ++i)
-        {
             for (int j = 0; j < graph.adj_[i].size(); ++j)
+                min_heap_.push(*graph.adj_[i][j]);
+
+        // printer(min_heap_);
+        int v, w;
+        UnionFind uf(graph.V());
+        while (!min_heap_.empty()) //&& mst_.size() < graph.V() - 1)
+        {
+            Edge e = min_heap_.top();
+            min_heap_.pop();
+            min_heap_.pop();
+
+            v = e.either();
+            w = e.other(v);
+
+
+            if(!uf.connected(v, w))
             {
-                min_heap.push(*graph.adj_[i][j]);
+                uf.unite(v, w);
+                mst_.push(e);
             }
+
         }
 
-        print_queue(min_heap);
+    }
+
+    void print_mst()
+    {
+        printer(mst_);
     }
 
 private:
-    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > min_heap;
-    std::queue<Edge *> mst;
+    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > min_heap_;
+    std::queue<Edge> mst_;
 };
 
 int main(int argc, char const *argv[])
@@ -137,9 +233,9 @@ int main(int argc, char const *argv[])
         graph.add_edge(new Edge(v, w, weight));
     }
 
-    KruskalMST kruskals_mst(graph);
+    KruskalMST kruskal_mst(graph);
+    kruskal_mst.print_mst();
 
-    // graph.print_graph();
 
     return 0;
 
