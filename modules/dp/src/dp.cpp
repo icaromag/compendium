@@ -211,5 +211,110 @@ namespace compendium
         return dp[u.size()][v.size()];
     }
 
+    int DP::matrix_multiplication(int *arr, int n)
+    {
+        int dp[n][n];
+        // dp[i,j] mininum number of multiplications needed to compute
+        // arr[i ... j]
+
+        for (int i = 1; i < n; i++)
+        {
+            dp[i][i] = 0;
+        }
+
+        for (int l = 2; l < n; l++)
+        {
+            for (int i = 1; i < n-l+1; i++)
+            {
+                int j = i+l-1;
+                dp[i][j] = INT_MAX;
+                for (int k = i; k < j; k++)
+                {
+                    dp[i][j] = std::min(dp[i][j], dp[i][k] + dp[k+1][j] + arr[i-1]*arr[k]*arr[j]);
+                }
+            }
+        }
+
+        return dp[1][n-1];
+    }
+
+    bool DP::subset_sum(int* arr, int n, int s)
+    {
+        bool ss[s+1][n+1]; //true if set[0..j-1] sum = i
+
+        for(int i = 0; i <= n; i++)
+        {
+            ss[0][i] = true; //sum = 0
+        }
+
+        for(int i = 1; i <= s; i++)
+        {
+            ss[i][0] = false; //set empty
+        }
+
+        for(int i = 0; i <= s; i++)
+        {
+            for(int j = 1; j <= n; j++)
+            {
+                ss[i][j] = ss[i][j-1];
+                if(i >= arr[j-1])
+                {
+                    ss[i][j] = ss[i][j] || ss[i - arr[j-1]][j-1];
+                }
+            }
+        }
+
+        return ss[s][n];
+    }
+
+    int DP::box_stacking(box* boxes, int n)
+    {
+        box *boxes_rotations = new box[n*3];
+
+        for(int i = 0; i < n; i++)
+        {
+
+            boxes_rotations[i] = boxes[i]; //original
+
+            boxes_rotations[i+n] =
+                box(std::min(boxes[i].h, boxes[i].d), boxes[i].w,
+                std::max(boxes[i].h, boxes[i].d)); //rotation 1
+
+            boxes_rotations[i+2*n] =
+                box(std::min(boxes[i].h, boxes[i].w), boxes[i].d,
+                std::max(boxes[i].h, boxes[i].w)); //rotation 2
+        }
+
+        n *= 3;
+        std::sort(boxes_rotations, boxes_rotations + n, compare_area); //large area first
+
+        int msh[n]; //std::max stack height
+        for(int i = 0; i < n; i++)
+        {
+            msh[i] = boxes_rotations[i].h;
+        }
+
+        for(int i = 1; i < n; i++)
+        {
+            for(int j = 0; j < i; j++)
+            {
+                if( boxes_rotations[i].w < boxes_rotations[j].w
+                    && boxes_rotations[i].d < boxes_rotations[j].d
+                    && msh[i] < msh[j] + boxes_rotations[i].h)
+                {
+                        msh[i] = msh[j] + boxes_rotations[i].h;
+                }
+            }
+        }
+
+        int max_height = msh[0];
+        for(int i = 1; i < n; i++)
+        {
+            max_height = std::max(msh[i], max_height);
+        }
+
+        return max_height;
+
+    }
 
 }

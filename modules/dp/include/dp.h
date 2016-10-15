@@ -26,6 +26,7 @@ namespace compendium
 
     /**
      * \brief TODO brief content
+     * All implementations inside src/dp.cpp
      */
     class DP
     {
@@ -48,13 +49,32 @@ namespace compendium
         // TODO docs
         static int longest_common_subsequence(const std::string &str1, const std::string &str2);
 
+        // TODO docs
         static int edit_distance(const std::string &u, const std::string &v);
 
+        // TODO docs
+        static int matrix_multiplication(int *arr, int n);
+
+        // TODO docs
+        static bool subset_sum(int* arr, int n, int s);
+
+        // Auxiliar data structure for box_stacking
+        struct box { //simplicity: w <= d
+            int w, h, d; //width, height, deepth
+            box(int _w = 0, int _h = 0, int _d = 0) :
+                w(_w), h(_h), d(_d) { }
+        };
+        /* box_stack util function */
+        static int box_stacking(box* boxes, int n);
+
         // TODO static _ pascal_triangle( );
-        // TODO static _ box_stacking( )
         // TODO static _ shortest_path( );
         // TODO static _ subset_sum( );
-        // TODO static _ matrix_mul( );
+
+    private:
+        static bool compare_area(const box &u, const box &v)
+        { return ((u.d * u.w) - (v.d * v.w) > 0) ? true : false; }
+
 
     };
 
