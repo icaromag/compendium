@@ -7,7 +7,6 @@
  *   \author Ícaro Lima Magalhães <icaro.lmag@gmail.com>
  *   \author Marcello Marques
  *
- *
  ***************************************************************************/
 
 #ifndef GREEDY_H
@@ -30,12 +29,15 @@ namespace compendium
 
     /**
      * \brief TODO brief content
+     * Prim and Kruskal at end of file
      */
     class GREEDY
     {
         static std::vector< std::pair<int, int> > activity_selection(
             std::vector< std::pair<int, int> > &act);
 
+        static double fractional_knapsack(
+            int W, std::vector< std::pair<int, int> > items);
     };
 
     // TODO move to Graph module
