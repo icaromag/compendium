@@ -61,3 +61,7 @@ bin/
 
 # folder of documentation
 doc/
+
+# ignore io files
+*.in
+*.out
