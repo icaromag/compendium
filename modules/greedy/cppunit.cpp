@@ -6,6 +6,13 @@ using namespace compendium;
 int main()
 {
 
+    // TODO fix to get inputs from /bin
+    // NoInputException
+    // if(argc < 2)
+    // {
+    //     return 0;
+    // }
+
     int V, E;
     int v, w; double weight;
     std::cin >> V >> E;

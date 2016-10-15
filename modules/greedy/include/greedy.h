@@ -7,6 +7,7 @@
  *   \author Ícaro Lima Magalhães <icaro.lmag@gmail.com>
  *   \author Marcello Marques
  *
+ *
  ***************************************************************************/
 
 #ifndef GREEDY_H
@@ -32,6 +33,8 @@ namespace compendium
      */
     class GREEDY
     {
+        static std::vector< std::pair<int, int> > activity_selection(
+            std::vector< std::pair<int, int> > &act);
 
     };
 
@@ -84,7 +87,7 @@ namespace compendium
 
     // private:
         unsigned int v_;
-        int w_;
+        unsigned int w_;
         double weight_;
 
     };
@@ -125,6 +128,8 @@ namespace compendium
 
     };
 
+    // TODO create DataStructures module to comport UnionFind
+    // Here it's used for cycle finding
     class UnionFind
     {
     public:
@@ -132,7 +137,7 @@ namespace compendium
         UnionFind(int N)
         {
             parent_ = new int[N];
-            rank_ = new short[N];
+            rank_ = new unsigned short[N];
 
             for (int i = 0; i < N; ++i)
             {
@@ -190,7 +195,7 @@ namespace compendium
 
     private:
         int *parent_;
-        short *rank_;
+        unsigned short *rank_;
         int count_;
 
     };
