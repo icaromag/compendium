@@ -10,7 +10,7 @@ class Edge
 {
 
 public:
-    Edge(int v, int w, double weight) :
+    Edge(const int v, const int w, const double weight) :
         v_(v), w_(w), weight_(weight) {}
 
     inline int either() const
@@ -39,11 +39,11 @@ public:
         }
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Edge &obj)
+    friend std::ostream& operator<<(std::ostream& os, const Edge &e)
     {
-        os << "|" << obj.v_
-           << "|" << obj.w_
-           << "|" << obj.weight_;
+        os << "|" << e.v_
+           << "|" << e.w_
+           << "|" << e.weight_;
         return os;
     }
 
@@ -61,12 +61,10 @@ public:
 class EdgeWeightedGraph
 {
 public:
-    EdgeWeightedGraph(int V) {
-        V_ = V;
-        adj_ = new std::deque<Edge*>[V];
-    }
+    EdgeWeightedGraph(const int V) :
+        V_(V), adj_(new std::deque<Edge *>[V]) { }
 
-    void add_edge(Edge *edge)
+    void add_edge(Edge *const edge)
     {
         const int v = edge->either();
         const int w = edge->other(v);
@@ -123,7 +121,7 @@ public:
         return p;
     }
 
-    bool connected(int p, int q)
+    bool connected(const int p, const int q)
     {
         return find(p) == find(q);
     }
@@ -171,7 +169,7 @@ class KruskalMST
 public:
 
     // Add to util class
-    template<typename T> void printer(T q)
+    template<typename T> void printer(T q) //copy
     {
         double path_cost(0);
 
