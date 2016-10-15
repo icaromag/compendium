@@ -1,4 +1,5 @@
 #include <vector>
+#include <cstring>
 #include <set>
 #include <queue>
 #include <iterator>
@@ -170,14 +171,17 @@ class KruskalMST
 public:
 
     // Add to util class
-    template<typename T> void printer(T q) {
+    template<typename T> void printer(T q)
+    {
+        double path_cost(0);
+
         while(!q.empty())
         {
             std::cout << q.front() << '\n';
-            // std::cout << q.top() << '\n';
+            path_cost += q.front().weight_;
             q.pop();
         }
-        std::cout << '\n';
+        std::cout << "\nKruskalMST path cost cost is: " << path_cost << std::endl;
     }
 
     KruskalMST(const EdgeWeightedGraph graph)
@@ -186,17 +190,16 @@ public:
             for (int j = 0; j < graph.adj_[i].size(); ++j)
                 min_heap_.push(*graph.adj_[i][j]);
 
-        // printer(min_heap_);
         int v, w;
         UnionFind uf(graph.V());
-        while (!min_heap_.empty()) //&& mst_.size() < graph.V() - 1)
+        while (!min_heap_.empty() && mst_.size() < graph.V() - 1)
         {
             Edge e = min_heap_.top();
-            min_heap_.pop();
-            min_heap_.pop();
 
-            v = e.either();
-            w = e.other(v);
+            // double pop adj[v]=w and adj[w]=v
+            min_heap_.pop(); min_heap_.pop();
+
+            v = e.either(), w = e.other(v);
 
 
             if(!uf.connected(v, w))
@@ -209,7 +212,7 @@ public:
 
     }
 
-    void print_mst()
+    void get_result()
     {
         printer(mst_);
     }
@@ -217,6 +220,88 @@ public:
 private:
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > min_heap_;
     std::queue<Edge> mst_;
+};
+
+
+class PrimMST
+{
+
+public:
+
+    PrimMST(const EdgeWeightedGraph graph) // Lazy
+    {
+        marked = new bool[graph.V()];
+        std::memset(marked, false, sizeof(marked));
+
+        visit(graph, 0); // assume graph is connected
+
+        int v, w;
+        while (!min_heap_.empty())
+        {
+
+            Edge e = min_heap_.top();
+            min_heap_.pop();
+
+            v = e.either(), w = e.other(v);
+
+            if(marked[v] && marked[w])
+            {
+                continue;
+            }
+
+            mst_.push(e);
+
+            if(!marked[v])
+            {
+                visit(graph, v);
+            }
+
+            if(!marked[w])
+            {
+                visit(graph, w);
+            }
+
+        }
+
+    }
+
+    void get_result()
+    {
+        get_result(mst_);
+    }
+
+    template<typename T> void get_result(T q)
+    {
+        double path_cost(0);
+
+        while(!q.empty())
+        {
+            std::cout << q.front() << '\n';
+            path_cost += q.front().weight_;
+            q.pop();
+        }
+        std::cout << "\nPrimMST path cost cost is: " << path_cost << std::endl;
+    }
+
+private:
+
+    void visit(const EdgeWeightedGraph &graph, const int v)
+    {
+        marked[v] = true;
+        for (int j = 0; j < graph.adj_[v].size(); ++j)
+        {
+            Edge e = *graph.adj_[v][j];
+            if(!marked[e.other(v)])
+            {
+                min_heap_.push(e);
+            }
+        }
+
+    }
+
+    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > min_heap_;
+    std::queue<Edge> mst_;
+    bool *marked;
 };
 
 int main(int argc, char const *argv[])
@@ -234,8 +319,10 @@ int main(int argc, char const *argv[])
     }
 
     KruskalMST kruskal_mst(graph);
-    kruskal_mst.print_mst();
+    kruskal_mst.get_result();
 
+    PrimMST prim_mst(graph);
+    prim_mst.get_result();
 
     return 0;
 
