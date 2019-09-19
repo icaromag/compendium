@@ -1,10 +1,10 @@
-# compendium-lib
+# cpp-compendium
 
 ## Requirements
 
 - Recommended OS: [Linux Ubuntu 14.04.4 LTS 64-bit](http://releases.ubuntu.com/14.04/)
-- You need some packages installed: `g++`, `git`, `doxygen`, `make`
-- To generate documentation: `doxygen`, `texlive`, `abntex`, `texlive-latex-extra`, `texlive-lang-portuguese`, `texlive-math-extra`
+- Dependencies: `g++`, `git`, `doxygen`, `make`
+- Generate documentation: `doxygen`, `texlive`, `abntex`, `texlive-latex-extra`, `texlive-lang-portuguese`, `texlive-math-extra`
 
 ```sh
     $ sudo apt-get install build-essential git make
@@ -13,8 +13,8 @@
 
 ## Environment
 
-- Set some environment variables in your system
-- Note: The path `$HOME/Workspace` can be replaced according to your preference
+- Setup system environment variables
+- The path `$HOME/Workspace` is relative to your system
 
 ```sh
     $ export COMPENDIUM_PROJECT_PATH=$HOME/Workspace/compendium/
@@ -25,7 +25,7 @@
 
 ## Sources
 
-- To get source code, use these commands
+- Clone the repository
 
 ```sh
     $ cd $COMPENDIUM_PROJECT_PATH
@@ -34,7 +34,7 @@
 
 ## Installation
 
-- To install
+- Run the following commands
 
 ```sh
     $ cd $COMPENDIUM_PROJECT_PATH/compendium-lib/
@@ -44,7 +44,7 @@
 
 ## Documentation
 
-- To generate documentation
+- To generate documentation using doxygen
 
 ```sh
     $ cd $COMPENDIUM_PROJECT_PATH/compendium-lib/
@@ -55,15 +55,15 @@
     $ gnome-open ./doc/latex/refman.pdf
 ```
 
-## Code Example
+## Example
 
-- To use the shared library, add the following flags to the compiler
+- To use the shared library add the following flags to the compiler
 
 ```sh
     -I /usr/local/include/compendium/core/ -L /usr/local/lib/compendium/core/ -lcompendium main.cpp -o a.out
 ```
 
-- Add this header in your `c++` program
+- Include the library header in your `cpp` source code
 
 ```cpp
     #include <compendium.h>
@@ -71,7 +71,7 @@
 
 ## Tests
 
-- To compile and run tests
+- Compile and run tests
 
 ```sh
     $ cd $COMPENDIUM_PROJECT_PATH/compendium-lib/
