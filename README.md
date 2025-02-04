@@ -81,6 +81,6 @@
 
 ## Contributors
 
-* Ícaro Lima Magalhães <icaro.lmag@gmail.com>
-* Mateus Pires Lustosa <mateusplpl@gmail.com>
-* Marcello Marques <prodmarcello@gmail.com>
+* Ícaro Lima Magalhães
+* Mateus Pires Lustosa
+* Marcello Marques
